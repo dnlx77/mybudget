@@ -1,18 +1,15 @@
 @extends('layouts.main')
-@section('content')
+@section('conti_content')
     
 <body>
-    <div class="table-container">
-        <table class="table table-hover table-bordered">
-            </body>
-                @foreach ($conti as $conto => $conteggio)
-                    <tr>
-                        <td>{{ $conto }} {{ $conteggio}}<br></td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="prova">
+        <ul>
+            @foreach ($conti as $conto => $conteggio)
+                <li>{{ $conto }} <em>{{ $conteggio}}</em></li>
+            @endforeach
+        </ul>
     </div>
 </body>
 </html>
+
 @endsection

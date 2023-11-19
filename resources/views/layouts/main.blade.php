@@ -9,18 +9,17 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-
+    
     <!-- Fonts -->
     <!-- Styles -->
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 </head>
 <body>
     <header class="container-fluid"></header>
     
     <div class="content-wrapper">  
-        <div class="container"> 
+        <div class="container-fluid"> 
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -30,9 +29,15 @@
                     </ul>
                 </div><br />
             @endif
-         <strong>{{  Session::get('success') }}</strong>
-        @yield('content')
+            <strong>{{  Session::get('success') }}</strong>
         </div>
+         
+        <div class="row">
+            <div class="col-2">
+                @yield('conti_content')
+            </div>
+        </div>
+      
     </div>
 </body>
 </html>
