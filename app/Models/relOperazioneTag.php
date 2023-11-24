@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class relOperazioneTag extends Model
 {
     use HasFactory;
+
+    protected $table = 'rel_operazioni_tags';
 }

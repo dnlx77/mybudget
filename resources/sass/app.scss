@@ -7,13 +7,53 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-li {
+/*#sidebar li {
     display: flex;
     width: 100%;
     justify-content: space-between;
     position: relative;
+    padding: 5px;
+}*/
+
+#sidebar ul {
+   list-style:disc;
 }
 
-ul {
-   list-style: none;
+.row-height {
+    height: 100vh;
+}
+
+.sidebar {
+    /*position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 25rem;
+    z-index: 1031;
+    overflow-x: hidden;*/
+    overflow-y: scroll;
+    background: #f8f9fa;
+    height: 100%;
+}
+
+.right{
+    overflow-y: scroll;
+    height: 100%;
+}
+
+div.pippo {
+    position: fixed;
+    left: 25rem;
+}
+
+body{
+    background: #ffffff;
+}
+
+span.conto {
+    float:left;
+}
+
+span.conteggio {
+    float:right;
 }

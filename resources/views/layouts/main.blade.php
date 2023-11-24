@@ -31,13 +31,28 @@
             @endif
             <strong>{{  Session::get('success') }}</strong>
         </div>
-         
-        <div class="row">
-            <div class="col-2">
-                @yield('conti_content')
-            </div>
-        </div>
-      
+        <div class="container-fluid">
+            <div class="row row-height">
+                <div class="col-3 sidebar">
+                    <h3><span class="conto">Tutti i conti</span> <span class="conteggio"><em>{{ $totale_conti}} <b>€</b></em></span><br></h3>
+                    <ul>
+                        @foreach ($conti as $conto => $conteggio)
+                            <li><span class="conto">{{ $conto }}</span> <span class="conteggio"><em>{{ $conteggio}} <b>€</b></em></span></li>
+                        @endforeach
+                    </ul>
+                    <div>
+                        <h3>Tags</h3><br>
+                        <ul>
+                            @foreach ($tags as $tag)
+                                <li>{{ $tag->nome }}</li>
+                            @endforeach
+                    </div>
+                </div>
+                <div class="col-9 right">
+                    @yield('dashboard_content')
+                </div>
+             </div>
+        </div>   
     </div>
 </body>
 </html>
