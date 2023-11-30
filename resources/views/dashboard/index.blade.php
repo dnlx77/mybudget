@@ -3,6 +3,11 @@
     
 <body>
     <div class="col-9 text-center">
+        <div class="row">
+            <div class="col-4"><h3>Guadagno {{ $guadagno}} €</h3></div>
+            <div class="col-4"><h3>Spesa {{ $spesa }} €</h3></div>
+            <div class="col-4"><h3>Saldo {{ $saldo }} €</h3></div>
+        </div>
         <div class="table-container">
             <table class="table table-hover">
                 <thead>

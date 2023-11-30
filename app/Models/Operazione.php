@@ -25,4 +25,18 @@ class Operazione extends Model
     public function conto() {
         return $this->belongsTo(Conto::class, 'conto_id');
     }
+
+    public function scopeCercaOperazioniAvanzato($query, $anno, $mese, $tag) {
+        if($anno)
+            $query->whereYear('data_operazione', $anno);
+        
+        if($mese)
+            $query->whereMonth('data_operazione', $mese);
+
+        if($tag) {
+            $query->join('rel_operazioni_tags', 'operazioni.id', '=', 'rel_operazioni_tags.operazione_id')->where('tag_id', '=', $tag);
+        }
+
+        return $query;
+    }
 }
