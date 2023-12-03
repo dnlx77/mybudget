@@ -6,3 +6,5 @@ window.Chart = Chart;
 import jQuery from 'jquery';
 
 window.$ = jQuery;	
+
+import 'jquery-ui/dist/jquery-ui'
