@@ -9,13 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    
     <!-- Fonts -->
     <!-- Styles -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -50,7 +43,7 @@
                         <h3>Tags</h3><br>
                         <ul>
                             @foreach ($tags as $tag)
-                                <li>{{ $tag->nome }}</li>
+                                <a href="{{ route('dashboard', array('0','0', $tag->id))}}"><li>{{ $tag->nome }}</li></a>
                             @endforeach
                     </div>
                 </div>

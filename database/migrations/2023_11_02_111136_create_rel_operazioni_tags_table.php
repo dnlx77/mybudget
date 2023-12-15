@@ -18,8 +18,8 @@ class CreateRelOperazioniTagsTable extends Migration
             $table->bigInteger('tag_id')->unsigned();
             $table->timestamps();
             $table->primary(['operazione_id', 'tag_id']);
-            $table->foreign('operazione_id')->references('id')->on('operazioni');
-            $table->foreign('tag_id')->references('id')->on('tag');
+            $table->foreign('operazione_id')->references('id')->on('operazioni')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
         });
     }
 

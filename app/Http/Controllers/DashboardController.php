@@ -50,7 +50,8 @@ class DashboardController extends Controller
             'operazioni' => $operazioni,
             'guadagno' => $guadagno,
             'spesa' => $spesa,
-            'saldo' => $saldo]);
+            'saldo' => $saldo,
+            'lista_conti' => $conti]);
     }
     
 }

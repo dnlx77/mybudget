@@ -7,4 +7,5 @@ import jQuery from 'jquery';
 
 window.$ = jQuery;	
 
-import 'jquery-ui/dist/jquery-ui'
+import 'bootstrap-datepicker';
+import "/node_modules/select2/dist/css/select2.css";

@@ -6,6 +6,7 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css';
 
 // JQueryUI
 
@@ -61,3 +62,7 @@ span.conto {
 span.conteggio {
     float:right;
 }
+
+.select2-container {
+    width: 25% !important
+ }

@@ -9,6 +9,7 @@
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-primary modale-operazione" data-bs-toggle="modal" data-bs-target="#operazioniModal">Aggiungi</button>
+                @include('operazioni.modal.insert')
             </div>
         </div>
         <div class="row">
@@ -25,6 +26,7 @@
                         <th>Tags</th>
                         <th>Descrizione</th>
                         <th>Importo</th>
+                        <th>Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,48 +41,18 @@
                             </ul></td>
                             <td>{{ $operazione->descrizione }}</td>
                             <td>{{ $operazione->importo }}<em>€</em></td>
+                            <td><a data-bs-target="#operazioniEditModal" class="modale-edit" data-bs-toggle="modal" data-id-operazione="{{ $operazione->id }}" href="#operazioniEditModal">modifica</a></td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            @include('operazioni.modal.edit');
         </div>
         {{ $operazioni->links() }}
     </div>
 
-    <!-- Modale inserimento operazioni -->
-    <div class="modal fade" id="operazioniModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Inserisci la data di lettura dell'albo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
-                </div>
-                <form enctype="multipart/form-data" method="post" action="">
-                    <div class="modal-body">
-                    
-                        @csrf
-                        <label for="data_lettura">Data operazione:</label>
-                        <input type="text" class="form-control" name="data_operazione" value=""/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>  
-                </form>
-            </div>
-        </div>
-    </div>
-    
 </body>
 
-<script type="module">
-    $(document).ready(function(){
-        $('[name=data_operazione]').datepicker({
-            changeMonth: true,
-            changeYear: true
-        });
-    });
-</script>
 </html>
 
 @endsection

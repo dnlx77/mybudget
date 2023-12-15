@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OperazioneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('operazioni/create', [OperazioneController::class, 'create'])->name('operazione.create');
+Route::get('operazioni/{operazione_id}/services/get-operazione', [OperazioneController::class, 'getOperazione'])->name('operazione.get_operazione_json');
+Route::post('operazioni/inserisci', [OperazioneController::class, 'insert'])->name('operazione.insert');
+Route::post('operazioni/edit', [OperazioneController::class, 'edit'])->name('operazione.edit');
