@@ -26,7 +26,10 @@ class Operazione extends Model
         return $this->belongsTo(Conto::class, 'conto_id');
     }
 
-    public function scopeCercaOperazioniAvanzato($query, $anno, $mese, $tag) {
+    public function scopeCercaOperazioniAvanzato($query, $anno, $mese, $tag, $conto) {
+        if($conto) 
+            $query->where('conto_id', '=', $conto);
+
         if($anno)
             $query->whereYear('data_operazione', $anno);
         

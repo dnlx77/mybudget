@@ -15,6 +15,7 @@
 
 </head>
 <body>
+
     <header class="container-fluid"></header>
     
     <div class="content-wrapper">  
@@ -33,17 +34,18 @@
         <div class="container-fluid">
             <div class="row row-height">
                 <div class="col-3 sidebar">
-                    <h3><span class="conto">Tutti i conti</span> <span class="conteggio"><em>{{ $totale_conti}} <b>€</b></em></span><br></h3>
+                    <h3><a href="{{ route('dashboard1', array($year, $mese, $tag1, '0')) }}"><span class="conto">Tutti i conti</span></a> <span class="conteggio"><em>{{ $totale_conti}} <b>€</b></em></span><br></h3>
                     <ul>
                         @foreach ($conti as $conto => $conteggio)
-                            <li><span class="conto">{{ $conto }}</span> <span class="conteggio"><em>{{ $conteggio}} <b>€</b></em></span></li>
+                            <li><a href="{{ route('dashboard1', array($year, $mese, $tag1, $conto)) }}"><span class="conto">{{ $conteggio[0] }}</span></a> <span class="conteggio"><em>{{ $conteggio[1]}} <b>€</b></em></span></li>
                         @endforeach
                     </ul>
                     <div>
                         <h3>Tags</h3><br>
                         <ul>
+                            <a href="{{ route('dashboard1', array($year, $mese, '0', $conto1)) }}"><li>Tutti i tags</li></a>
                             @foreach ($tags as $tag)
-                                <a href="{{ route('dashboard', array('0','0', $tag->id))}}"><li>{{ $tag->nome }}</li></a>
+                                <a href="{{ route('dashboard1', array($year, $mese, $tag->id, $conto1)) }}"><li>{{ $tag->nome }}</li></a>
                             @endforeach
                     </div>
                 </div>

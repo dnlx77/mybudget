@@ -62,7 +62,7 @@
 
 <script type="module">
     $(document).ready(function(){
-        $('[name=data_operazione]').datepicker({
+        $("[name='data_operazione']").datepicker({
             format: 'dd-mm-yyyy',
             todayHighlight: true,
             language: "it",
@@ -85,7 +85,7 @@
                 dataType: 'json',
                 success:function(result) {
                     console.log(result);
-                    console.log($(this).attr('data-id-operazione'));
+                    //console.log($(this).attr('data-id-operazione'));
                     /*$(result).each(function(index, value) {
                         $("[name='importo']").val(value.importo);
                         $("[name='data_operazione']").val(value.data_operazione);
@@ -94,6 +94,7 @@
                     $("[name='conto_partenza']").val(result.operazione.conto_id).trigger("change");
                     $("[name='importo']").val(result.operazione.importo);
                     $("[name='data_operazione']").val(result.operazione.data_operazione);
+                    console.log($("[name='data_operazione']").val());
                     $("[name='descrizione']").val(result.operazione.descrizione);
                     $("#tags_select_edit").val(result.tags).trigger("change");
                 },

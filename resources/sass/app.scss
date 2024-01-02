@@ -20,6 +20,26 @@
     padding: 5px;
 }*/
 
+a {
+    color: $link_color;
+    text-decoration: none;
+}
+
+a:hover {
+    color: $link_hover_color;
+    text-decoration: none;
+}
+
+    .main-menu {
+        list-style: none;
+        margin-bottom: 0;
+        padding: 0;
+        li {
+            display: inline;
+            margin: 0 10px;
+        }
+    }
+
 #sidebar ul {
    list-style:disc;
 }
@@ -66,3 +86,4 @@ span.conteggio {
 .select2-container {
     width: 25% !important
  }
+
