@@ -49,13 +49,6 @@ a:hover {
 }
 
 .sidebar {
-    /*position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 25rem;
-    z-index: 1031;
-    overflow-x: hidden;*/
     overflow-y: scroll;
     background: #f8f9fa;
     height: 100%;
@@ -73,6 +66,7 @@ div.pippo {
 
 body{
     background: #ffffff;
+    padding: 10px;
 }
 
 span.conto {
@@ -86,4 +80,13 @@ span.conteggio {
 .select2-container {
     width: 25% !important
  }
+
+ ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+* {
+  -ms-overflow-style: none !important;
+}
 

@@ -19,6 +19,7 @@ class CreateOperazioniTable extends Migration
             $table->decimal('importo', 10, 2);
             $table->string('descrizione', 511)->nullable();
             $table->bigInteger('conto_id')->unsigned();
+            $table->char('trasferimento');
             $table->timestamps();
             $table->foreign('conto_id')->references('id')->on('conti');
         });

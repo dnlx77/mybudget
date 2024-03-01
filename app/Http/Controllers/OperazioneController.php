@@ -15,6 +15,10 @@ class OperazioneController extends Controller
         $operazione->importo = $request->get('importo');
         $operazione->descrizione = $request->get('descrizione');
         $operazione->conto_id = $request->get('conto_partenza');
+        if($request->get('conto_destinazione'))
+            $operazione->trasferimento='T';
+        else
+            $operazione->trasferimento='N';
         $operazione->save();
 
         foreach($request->get('tags') as $tag) {
@@ -30,6 +34,7 @@ class OperazioneController extends Controller
             $operazione->importo = $request->get('importo')*(-1);
             $operazione->descrizione = $request->get('descrizione');
             $operazione->conto_id = $request->get('conto_destinazione');
+            $operazione->trasferimento='T';
             $operazione->save();
 
             foreach($request->get('tags') as $tag) {

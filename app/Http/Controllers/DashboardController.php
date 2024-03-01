@@ -31,9 +31,9 @@ class DashboardController extends Controller
         if(!$anno && !$mese && !$tag && !$conto_vis){
             $operazioni = operazione::all();
             foreach ($operazioni as $operazione) {
-                if ($operazione->importo > 0)
+                if ($operazione->importo > 0 && $operazione->trasferimento == 'N')
                     $guadagno += $operazione->importo;
-                else
+                else if ($operazione->importo < 0 && $operazione->trasferimento == 'N')
                     $spesa += abs($operazione->importo);
             }
             $operazioni = operazione::orderBy('data_operazione', 'desc')->orderBy('id', 'desc')->paginate(50);
@@ -41,9 +41,15 @@ class DashboardController extends Controller
         else {
             $operazioni = operazione::CercaOperazioniAvanzato($anno, $mese, $tag, $conto_vis)->get();
             foreach ($operazioni as $operazione) {
-                if ($operazione->importo > 0)
+                if ($operazione->importo > 0 && $operazione->trasferimento == 'N')
                     $guadagno += $operazione->importo;
-                else
+                else if ($operazione->importo < 0 && $operazione->trasferimento == 'N')
+                    $spesa += abs($operazione->importo);
+
+                if ($operazione->importo > 0 && $operazione->trasferimento == 'T' && $conto_vis)
+                    $guadagno += $operazione->importo;
+
+                if ($operazione->importo < 0 && $operazione->trasferimento == 'T' && $conto_vis)
                     $spesa += abs($operazione->importo);
             }
             $operazioni = operazione::CercaOperazioniAvanzato($anno, $mese, $tag, $conto_vis)->orderBy('data_operazione', 'desc')->orderBy('id', 'desc')->paginate(50);
