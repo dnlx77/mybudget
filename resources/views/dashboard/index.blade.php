@@ -2,7 +2,7 @@
 @section('dashboard_content')
     
 <body>
-    <div class="col-9 text-center">
+    <div class="col-9 text-center"> 
         <div class="row">
             <div class="col-9">
                     <ul class="main-menu">
@@ -53,7 +53,7 @@
                 <tbody>
                     @foreach ($operazioni AS $operazione)
                         <tr>
-                            <td>{{ $operazione->data_operazione }}</td>
+                            <td>{{ date('d-m-Y', strtotime($operazione->data_operazione)) }}</td>
                             <td>{{ $operazione->conto->nome }}</td>
                             <td><ul>
                                 @foreach ($operazione->tags AS $tag)
@@ -79,7 +79,7 @@
         
         var pathname = window.location.pathname;
         var urlsegment = pathname.split("/");
-        var anno = urlsegment[2];
+        var anno = urlsegment[2]
         var mese = urlsegment[3];
         var tag = urlsegment[4];
         var cont = urlsegment[5];
@@ -91,7 +91,7 @@
             var selVal=$(this).val();
             window.location.href = "{{ route('dashboard1', '') }}" + "/" + selVal + "/" + mese + "/" + tag + "/" + cont;
             
-            /* La riga sotto è equivalente a quella sopra ma quella soptra è più legibile */
+            /* La riga sotto è equivalente a quella sopra ma quella soptra è più leggibile */
             //window.location.href=selVal;
         });
 

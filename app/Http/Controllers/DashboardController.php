@@ -10,7 +10,7 @@ use App\Models\tag;
 class DashboardController extends Controller
 {
     public function index() {
-        return redirect()->route('dashboard1', array(Date("Y"), Date("m"), 0, 1));
+        return redirect()->route('dashboard1', array(Date("Y"), Date("m"), 0, 0));
     }
 
     public function index1($anno = 0, $mese = 0, $tag = 0, $conto_vis = 0) {
@@ -23,7 +23,7 @@ class DashboardController extends Controller
         for ($i=$primo_anno; $i<=$ultimo_anno; $i++)
             $anni[$i] = $i;
         
-        $totale_conti = round(operazione::all()->sum('importo') ,2);
+        $totale_conti = round(operazione::all()->sum('importo'), 2);
         foreach ($conti as $conto) {
             $array_conti[$conto->id] = array($conto->nome, $conto->operazioni()->sum('importo'));
         }

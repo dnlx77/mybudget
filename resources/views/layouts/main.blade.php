@@ -41,11 +41,23 @@
                         @endforeach
                     </ul>
                     <div>
-                        <h3>Tags</h3><br>
+                        <div class="row">
+                            <div class="col-8">
+                                <h3>Tags</h3>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-primary modale-tag" data-bs-toggle="modal" data-bs-target="#tagsModal">Aggiungi tag</button>
+                                @include('dashboard.modal.insert')
+                                @include('dashboard.modal.edit')
+                            </div>
+                        </div>
                         <ul>
                             <a href="{{ route('dashboard1', array($year, $mese, '0', $conto1)) }}"><li>Tutti i tags</li></a>
                             @foreach ($tags as $tag)
-                                <a href="{{ route('dashboard1', array($year, $mese, $tag->id, $conto1)) }}"><li>{{ $tag->nome }}</li></a>
+                                <li>
+                                    <a href="{{ route('dashboard1', array($year, $mese, $tag->id, $conto1)) }}">{{ $tag->nome }}</a>
+                                    <a data-bs-target="#tagsEditModal" class="modale-tag-edit" data-bs-toggle="modal" data-id-tag="{{ $tag->id }}" href="#tagsEditModal"><i class="bi bi-pencil"></i></a>
+                                </li>
                             @endforeach
                     </div>
                 </div>

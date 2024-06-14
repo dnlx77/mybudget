@@ -34,7 +34,7 @@
                             </div>
                             <div class="row">
                                 <label for="data_operazione">Data operazione:</label>
-                                <input type="text" class="form-control" name="data_operazione" value="{{ !empty(old('data_operazione')) ? old('data_operazione') : (!empty($operazione->data_operazione) ? $operazione->data_operazione : '') }}"/>
+                                <input type="text" class="form-control" name="data_operazione" value="{{ !empty(old('data_operazione')) ? old('data_operazione') : (!empty($operazione->data_operazione) ? $operazione->data_operazione : date('d-m-Y', strtotime("now"))) }}"/>
                             </div>
                             <div class="row">
                                 <label for="tags_select">tags:</label>
