@@ -11,7 +11,7 @@ class OperazioneController extends Controller
     public function insert(Request $request) {
 
         $operazione = new Operazione();
-        $operazione->data_operazione = \DateTime::createFromFormat('d-m-Y', $request->get('data_operazione'));
+        $operazione->data_operazione = \DateTime::createFromFormat('Y-m-d', $request->get('data_operazione'));
         $operazione->importo = $request->get('importo');
         $operazione->descrizione = $request->get('descrizione');
         $operazione->conto_id = $request->get('conto_partenza');
@@ -30,7 +30,7 @@ class OperazioneController extends Controller
 
         if($request->get('conto_destinazione')) {
             $operazione = new Operazione();
-            $operazione->data_operazione = \DateTime::createFromFormat('d-m-Y', $request->get('data_operazione'));
+            $operazione->data_operazione = \DateTime::createFromFormat('Y-m-d', $request->get('data_operazione'));
             $operazione->importo = $request->get('importo')*(-1);
             $operazione->descrizione = $request->get('descrizione');
             $operazione->conto_id = $request->get('conto_destinazione');
@@ -61,7 +61,7 @@ class OperazioneController extends Controller
 
     public function edit (Request $request) {
         $operazione = Operazione::find($request->edit_operazione_id);
-        $operazione->data_operazione = \DateTime::createFromFormat('d-m-Y', $request->get('data_operazione'));
+        $operazione->data_operazione = \DateTime::createFromFormat('Y-m-d', $request->get('data_operazione'));
         $operazione->importo = $request->get('importo');
         $operazione->descrizione = $request->get('descrizione');
         $operazione->conto_id = $request->get('conto_partenza');

@@ -63,7 +63,7 @@
 <script type="module">
     $(document).ready(function(){
         $("[name='data_operazione']").datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'yyyy-mm-dd',
             todayHighlight: true,
             language: "it",
             weekStart: 1,

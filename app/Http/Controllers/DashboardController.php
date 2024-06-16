@@ -39,7 +39,7 @@ class DashboardController extends Controller
             $operazioni = operazione::orderBy('data_operazione', 'desc')->orderBy('id', 'desc')->paginate(50);
         }
         else {
-            $operazioni = operazione::CercaOperazioniAvanzato($anno, $mese, $tag, $conto_vis)->get();
+            $operazioni = operazione::CercaOperazioniAvanzato($anno, $mese, 0, $tag, $conto_vis)->get();
             foreach ($operazioni as $operazione) {
                 if ($operazione->importo > 0 && $operazione->trasferimento == 'N')
                     $guadagno += $operazione->importo;
@@ -52,7 +52,7 @@ class DashboardController extends Controller
                 if ($operazione->importo < 0 && $operazione->trasferimento == 'T' && $conto_vis)
                     $spesa += abs($operazione->importo);
             }
-            $operazioni = operazione::CercaOperazioniAvanzato($anno, $mese, $tag, $conto_vis)->orderBy('data_operazione', 'desc')->orderBy('id', 'desc')->paginate(50);
+            $operazioni = operazione::CercaOperazioniAvanzato($anno, $mese, 0, $tag, $conto_vis)->orderBy('data_operazione', 'desc')->orderBy('id', 'desc')->paginate(50);
         }
         
         $saldo = round($guadagno - $spesa ,2);
@@ -76,5 +76,36 @@ class DashboardController extends Controller
             'conto' => $conto_vis,
             'conto1' => $conto_vis]);
     }
-    
+
+    public function getSaldi($anno = 0, $mese = 0, $tag = 0, $conto_vis = 0) {
+        $totale_conti = [];
+        
+        if ($mese != 0 && $anno != 0){
+            $giorni = cal_days_in_month(CAL_GREGORIAN, $mese, $anno);
+
+            for($i=1; $i<=$giorni; $i++){
+                $data=$anno.'-'.$mese.'-'.$i;
+                $totale_conti[$i]=round(operazione::CercaOperazioniPrimaDi($data, $conto_vis, $tag)->sum('importo'), 2);
+            }
+        } 
+
+        if ($mese == 0 && $anno != 0)
+        {
+            for($i=1; $i<13; $i++){
+                $data=$anno.'-'.$i.'-'.'31';
+                $totale_conti[$i]=round(operazione::CercaOperazioniPrimaDi($data, $conto_vis, $tag)->sum('importo'), 2);
+            }
+        }
+
+        if ($anno == 0 && $mese == 0){
+            $primo_anno = date("Y", strtotime(operazione::min('data_operazione')));
+            $ultimo_anno = date("Y", strtotime(operazione::max('data_operazione')));
+            for($i=$primo_anno; $i<=$ultimo_anno; $i++){
+                $data=$i.'-'.'12'.'-'.'31';
+                $totale_conti[$i]=round(operazione::CercaOperazioniPrimaDi($data, $conto_vis, $tag)->sum('importo'), 2);
+            }
+        }
+
+        return json_encode($totale_conti);
+    }   
 }

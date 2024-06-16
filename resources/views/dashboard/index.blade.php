@@ -21,8 +21,8 @@
                         <a href="{{ route('dashboard1', array($anno, '12', $tag, $conto)) }}"><li>Dic</li></a>
                         <li>
                             <select name="anni" id="anno-select">
-                                @foreach ($anni as $anno)
-                                    <option value="{{$anno}}">{{ $anno }}</option>
+                                @foreach ($anni as $anno1)
+                                    <option value="{{$anno1}}">{{ $anno1 }}</option>
                                 @endforeach
                             </select>
                         </li>
@@ -31,6 +31,54 @@
             <div class="col-3">
                 <button type="button" class="btn btn-primary modale-operazione" data-bs-toggle="modal" data-bs-target="#operazioniModal">Aggiungi</button>
                 @include('operazioni.modal.insert')
+            </div>
+        </div>
+        <div class="row">
+            @switch($mese)
+                @case(0)
+                <h2>Anno {{ $anno }}</h2>
+                @break
+                @case(1)
+                <h2>Gennaio {{ $anno }}</h2>
+                @break
+                @case(2)
+                <h2>Febbraio {{ $anno }}</h2>
+                @break
+                @case(3)
+                <h2>Marzo {{ $anno }}</h2>
+                @break
+                @case(4)
+                <h2>Aprile {{ $anno }}</h2>
+                @break
+                @case(5)
+                <h2>Maggio {{ $anno }}</h2>
+                @break
+                @case(6)
+                <h2>Giugno {{ $anno }}</h2>
+                @break
+                @case(7)
+                <h2>Luglio {{ $anno }}</h2>
+                @break
+                @case(8)
+                <h2>Agosto {{ $anno }}</h2>
+                @break
+                @case(9)
+                <h2>Settembre {{ $anno }}</h2>
+                @break
+                @case(10)
+                <h2>Ottobre {{ $anno }}</h2>
+                @break
+                @case(11)
+                <h2>Novembre {{ $anno }}</h2>
+                @break
+                @case(12)
+                <h2>Dicembre {{ $anno }}</h2>
+                @break
+            @endswitch
+        </div>
+        <div class="row">
+            <div>
+                <canvas id="myChart" height="60px"></canvas>
             </div>
         </div>
         <div class="row">
@@ -91,9 +139,47 @@
             var selVal=$(this).val();
             window.location.href = "{{ route('dashboard1', '') }}" + "/" + selVal + "/" + mese + "/" + tag + "/" + cont;
             
-            /* La riga sotto è equivalente a quella sopra ma quella soptra è più leggibile */
+            /* La riga sotto è equivalente a quella sopra ma quella sopra è più leggibile */
             //window.location.href=selVal;
         });
+
+        $.ajax({
+            url:"/dashboard/services/get_saldi" + "/" + anno + "/" + mese + "/" + tag + "/" + cont,
+            method:"GET",
+            data:{},
+            dataType: 'json',
+            success:function(result)
+            {
+                console.log(Object.keys(result));
+                console.log(Object.values(result));
+                const ctx = document.getElementById('myChart');
+                new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(result),
+                    datasets: [{
+                    label: '# totale conti',
+                    data: Object.values(result),
+                    backgroundColor: '#78faff',
+                    fill: true,
+                    //borderWidth: 0,
+                    tension: 0
+                    }]
+                },
+                options: {
+                    scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                    }
+                }
+                });
+            },
+            error:function()
+            {
+                console.log(error);
+            }
+            }); 
 
     });
 </script>

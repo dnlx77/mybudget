@@ -34,7 +34,7 @@
                             </div>
                             <div class="row">
                                 <label for="data_operazione">Data operazione:</label>
-                                <input type="text" class="form-control" name="data_operazione" value="{{ !empty(old('data_operazione')) ? old('data_operazione') : (!empty($operazione->data_operazione) ? $operazione->data_operazione : date('d-m-Y', strtotime("now"))) }}"/>
+                                <input type="text" class="form-control" name="data_operazione" value="{{ !empty(old('data_operazione')) ? old('data_operazione') : (!empty($operazione->data_operazione) ? $operazione->data_operazione : date('Y-m-d', strtotime("now"))) }}"/>
                             </div>
                             <div class="row">
                                 <label for="tags_select">tags:</label>
@@ -62,13 +62,13 @@
 
 <script type="module">
     $(document).ready(function(){
-        $('[name=data_operazione]').datepicker({
-            format: 'dd-mm-yyyy',
+        $("[name='data_operazione']").datepicker({
+            format: 'yyyy-mm-dd',
             todayHighlight: true,
             language: "it",
             weekStart: 1,
             maxViewMode: 3
-            });
+        });
         
         $('#tags_select').select2({
             dropdownParent: $('#operazioniModal')

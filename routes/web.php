@@ -24,6 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/{anno?}/{mese?}/{tag?}/{conto?}', [DashboardController::class, 'index1'])->name('dashboard1');
+Route::get('dashboard/services/get_saldi/{anno?}/{mese?}/{tag?}/{conto?}', [DashboardController::class, 'getSaldi'])->name('dadhboard.get_saldi_json');
 
 Route::get('operazioni/{operazione_id}/services/get-operazione', [OperazioneController::class, 'getOperazione'])->name('operazione.get_operazione_json');
 Route::post('operazioni/inserisci', [OperazioneController::class, 'insert'])->name('operazione.insert');
