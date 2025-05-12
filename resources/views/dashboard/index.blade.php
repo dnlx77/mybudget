@@ -164,7 +164,7 @@
                     fill: true,
                     //borderWidth: 0,
                     tension: 0
-                    }]
+                    }],
                 },
                 options: {
                     scales: {
