@@ -70,6 +70,13 @@ class OperazioneController extends Controller
 
         return redirect(route('dashboard'))->with('success', 'Operazione aggiornata');
     }
+
+    public function delete ($operazione_id) {
+        $operazione = Operazione::find($operazione_id);
+        $operazione->delete();
+
+        return redirect(route('dashboard'))->with('success', 'Operazione aggiornata');
+    }
 }
 
     

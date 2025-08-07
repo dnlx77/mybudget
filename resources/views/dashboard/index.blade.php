@@ -95,7 +95,7 @@
                         <th>Tags</th>
                         <th>Descrizione</th>
                         <th>Importo</th>
-                        <th>Azioni</th>
+                        <th colspan="2">Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,6 +111,13 @@
                             <td>{{ $operazione->descrizione }}</td>
                             <td>{{ $operazione->importo }}<em>€</em></td>
                             <td><a data-bs-target="#operazioniEditModal" class="modale-edit" data-bs-toggle="modal" data-id-operazione="{{ $operazione->id }}" href="#operazioniEditModal">modifica</a></td>
+                            <td>
+                                <form enctype="multipart/form-data" method="post" action="{{ route('operazione.delete', $operazione->id) }}" onsubmit="return confirm('Sei sicuro di voler cancellare questa operazione?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Cancella</button>
+                                </form>   
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

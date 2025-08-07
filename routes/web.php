@@ -29,6 +29,7 @@ Route::get('dashboard/services/get_saldi/{anno?}/{mese?}/{tag?}/{conto?}', [Dash
 Route::get('operazioni/{operazione_id}/services/get-operazione', [OperazioneController::class, 'getOperazione'])->name('operazione.get_operazione_json');
 Route::post('operazioni/inserisci', [OperazioneController::class, 'insert'])->name('operazione.insert');
 Route::post('operazioni/edit', [OperazioneController::class, 'edit'])->name('operazione.edit');
+Route::delete('operazioni/delete/{operazione_id}', [OperazioneController::class, 'delete'])->name('operazione.delete');
 
 Route::post('tags/inserisci', [TagController::class, 'insert'])->name('tag.insert');
 Route::post('tags/edit', [TagController::class, 'edit'])->name('tag.edit');
