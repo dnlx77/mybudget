@@ -16,7 +16,13 @@
 </head>
 <body>
 
-    <header class="container-fluid"></header>
+    <header class="container-fluid d-flex justify-content-end align-items-center gap-2 py-2">
+        <span>{{ Auth::user()->name }}</span>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Esci</button>
+        </form>
+    </header>
     
     <div class="content-wrapper">  
         <div class="container-fluid"> 
