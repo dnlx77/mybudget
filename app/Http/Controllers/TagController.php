@@ -16,7 +16,7 @@ class TagController extends Controller
     }
 
     public function edit(Request $request) {
-        $tag = Tag::find($request->edit_tag_id);
+        $tag = Tag::findOrFail($request->edit_tag_id);
         $tag->nome = $request->get('edit-tag');
         $tag->save();
 
@@ -25,7 +25,7 @@ class TagController extends Controller
 
     public function getTag ($tag_id) {
 
-        $tag = Tag::find($tag_id);
+        $tag = Tag::findOrFail($tag_id);
 
         $arr = ['nome' => $tag->nome];
         return json_encode($arr);

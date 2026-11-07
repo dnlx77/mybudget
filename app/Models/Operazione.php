@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\BelongsToUser;
 
 class Operazione extends Model
 {
-    use HasFactory;
+    use HasFactory, BelongsToUser;
 
     protected $table = 'operazioni';      
 
@@ -16,6 +17,7 @@ class Operazione extends Model
         'importo',
         'descrizione',
         'conto_id',
+        'trasferimento',
     ];
 
     public function tags() {
@@ -28,7 +30,8 @@ class Operazione extends Model
 
     public function scopeCercaOperazioniAvanzato($query, $anno, $mese, $giorno, $tag, $conto) {
         if($conto) 
-            $query->where('conto_id', '=', $conto);
+            $query->where('conto_id',
+        'trasferimento', '=', $conto);
 
         if($anno)
             $query->whereYear('data_operazione', $anno);
@@ -48,7 +51,8 @@ class Operazione extends Model
 
     public function scopeCercaOperazioniPrimaDi($query, $data, $conto, $tag) {
         if ($conto)
-            $query->where('conto_id', '=', $conto);
+            $query->where('conto_id',
+        'trasferimento', '=', $conto);
 
         if ($tag)
             $query->join('rel_operazioni_tags', 'operazioni.id', '=', 'rel_operazioni_tags.operazione_id')->where('tag_id', '=', $tag);

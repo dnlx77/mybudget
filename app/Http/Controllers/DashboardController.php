@@ -17,9 +17,10 @@ class DashboardController extends Controller
         $spesa = 0;
         $guadagno = 0;
         $anni = [];
+        $array_conti = [];
         $conti = Conto::all();
-        $primo_anno = date("Y", strtotime(operazione::min('data_operazione')));
-        $ultimo_anno = date("Y", strtotime(operazione::max('data_operazione')));
+        $primo_anno = date("Y", strtotime(operazione::min('data_operazione') ?? 'now'));
+        $ultimo_anno = date("Y", strtotime(operazione::max('data_operazione') ?? 'now'));
         for ($i=$primo_anno; $i<=$ultimo_anno; $i++)
             $anni[$i] = $i;
         

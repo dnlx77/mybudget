@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OperazioneController;
@@ -16,22 +17,27 @@ use App\Http\Controllers\TagController;
 |
 */
 
+Auth::routes(['reset' => false, 'verify' => false, 'confirm' => false]);
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function () {
+    return redirect()->route('dashboard');
+})->name('home');
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('dashboard/{anno?}/{mese?}/{tag?}/{conto?}', [DashboardController::class, 'index1'])->name('dashboard1');
-Route::get('dashboard/services/get_saldi/{anno?}/{mese?}/{tag?}/{conto?}', [DashboardController::class, 'getSaldi'])->name('dadhboard.get_saldi_json');
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard/{anno?}/{mese?}/{tag?}/{conto?}', [DashboardController::class, 'index1'])->name('dashboard1');
+    Route::get('dashboard/services/get_saldi/{anno?}/{mese?}/{tag?}/{conto?}', [DashboardController::class, 'getSaldi'])->name('dadhboard.get_saldi_json');
 
-Route::get('operazioni/{operazione_id}/services/get-operazione', [OperazioneController::class, 'getOperazione'])->name('operazione.get_operazione_json');
-Route::post('operazioni/inserisci', [OperazioneController::class, 'insert'])->name('operazione.insert');
-Route::post('operazioni/edit', [OperazioneController::class, 'edit'])->name('operazione.edit');
-Route::delete('operazioni/delete/{operazione_id}', [OperazioneController::class, 'delete'])->name('operazione.delete');
+    Route::get('operazioni/{operazione_id}/services/get-operazione', [OperazioneController::class, 'getOperazione'])->name('operazione.get_operazione_json');
+    Route::post('operazioni/inserisci', [OperazioneController::class, 'insert'])->name('operazione.insert');
+    Route::post('operazioni/edit', [OperazioneController::class, 'edit'])->name('operazione.edit');
+    Route::delete('operazioni/delete/{operazione_id}', [OperazioneController::class, 'delete'])->name('operazione.delete');
 
-Route::post('tags/inserisci', [TagController::class, 'insert'])->name('tag.insert');
-Route::post('tags/edit', [TagController::class, 'edit'])->name('tag.edit');
-Route::get('tags/{tags_id}/services/get-tag', [TagController::class, 'getTag'])->name('tag.get_tag_json');
-
+    Route::post('tags/inserisci', [TagController::class, 'insert'])->name('tag.insert');
+    Route::post('tags/edit', [TagController::class, 'edit'])->name('tag.edit');
+    Route::get('tags/{tags_id}/services/get-tag', [TagController::class, 'getTag'])->name('tag.get_tag_json');
+});

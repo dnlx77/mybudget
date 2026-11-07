@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conto;
 use App\Models\Operazione;
 use App\Models\relOperazioneTag;
 use Illuminate\Http\Request;
@@ -9,6 +10,11 @@ use Illuminate\Http\Request;
 class OperazioneController extends Controller
 {
     public function insert(Request $request) {
+
+        // Verifica che i conti appartengano all'utente (il global scope filtra per user_id)
+        Conto::findOrFail($request->get('conto_partenza'));
+        if($request->get('conto_destinazione'))
+            Conto::findOrFail($request->get('conto_destinazione'));
 
         $operazione = new Operazione();
         $operazione->data_operazione = \DateTime::createFromFormat('Y-m-d', $request->get('data_operazione'));
@@ -50,7 +56,7 @@ class OperazioneController extends Controller
 
     public function getOperazione ($operazione_id) {
 
-        $operazione = Operazione::find($operazione_id);
+        $operazione = Operazione::findOrFail($operazione_id);
         $tags = $operazione->tags;
         $tags_array =[];
         foreach ($tags as $tag)
@@ -60,7 +66,8 @@ class OperazioneController extends Controller
     }
 
     public function edit (Request $request) {
-        $operazione = Operazione::find($request->edit_operazione_id);
+        $operazione = Operazione::findOrFail($request->edit_operazione_id);
+        Conto::findOrFail($request->get('conto_partenza'));
         $operazione->data_operazione = \DateTime::createFromFormat('Y-m-d', $request->get('data_operazione'));
         $operazione->importo = $request->get('importo');
         $operazione->descrizione = $request->get('descrizione');
@@ -72,7 +79,7 @@ class OperazioneController extends Controller
     }
 
     public function delete ($operazione_id) {
-        $operazione = Operazione::find($operazione_id);
+        $operazione = Operazione::findOrFail($operazione_id);
         $operazione->delete();
 
         return redirect(route('dashboard'))->with('success', 'Operazione aggiornata');
